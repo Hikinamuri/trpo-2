@@ -1,0 +1,203 @@
+/* Общий контейнер автомата */
+.dispenser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    perspective: 1000px; /* Добавляем перспективу для 3D */
+  }
+  
+  .dispenser-body {
+    border: 2px solid #555;
+    padding: 30px;
+    width: 350px;
+    height: 600px;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+    position: relative;
+    background-image: linear-gradient(145deg, #a0a0a0, #f0f0f0);
+    transform: rotateX(10deg); /* Добавляем небольшой наклон для 3D */
+  }
+  
+  /* Экран дисплея */
+  .display-screen {
+    background: radial-gradient(circle at top left, #222, #333);
+    color: #00ff66;
+    padding: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border: 3px solid #666;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* Контейнер для бутыли */
+  .bottle-area {
+    cursor: pointer;
+    position: relative;
+    width: 150px;
+    height: 250px;
+    background: linear-gradient(145deg, #ffffff, #d9e9f2);
+    border: 3px solid #666;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .bottle-area:hover {
+    transform: translateY(-5px); /* Легкая анимация при наведении */
+  }
+  
+  /* Бутыль с водой */
+  .bottle {
+    width: 70%;
+    height: calc(100% - 50px);
+    position: relative;
+    background: linear-gradient(145deg, #8fc6e6, #6bbff2);
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3), inset 0px 2px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transform: translateY(25px);
+}
+
+.bottle-area-div {
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Добавим анимацию для трансформации */
+    transform: translateY(20px); /* Начальная позиция чуть ниже */
+}
+
+.bottle-area-div.show {
+    opacity: 1; /* Показать бутылку */
+    transform: translateY(0); /* Возврат в исходное положение */
+}
+
+
+  /* Горлышко бутылки */
+  .neck {
+    width: 25%; /* Ширина горлышка */
+    height: 40px; /* Высота горлышка */
+    background: linear-gradient(145deg, #8fc6e6, #6bbff2); /* Градиент для горлышка */
+    position: absolute;
+    top: 20px; /* Позиционирование горлышка */
+    left: 38%; /* Центрирование по горизонтали */
+    border-radius: 10px 10px 0 0; /* Закругленные верхние углы */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+
+  .bottle.installed {
+    background: linear-gradient(145deg, #00aaff, #00d4ff);
+  }
+  
+  /* Вода внутри бутыли */
+  .water {
+    background-color: #00ccff;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 0;
+    border-radius: 0 0 15px 15px;
+    transition: height 0.5s ease;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  
+  /* Слот для карты */
+  .card-slot {
+    position: absolute;
+    right: 7%;
+    top: 29%;
+    cursor: pointer;
+    width: 50px;
+    height: 25px;
+    background: linear-gradient(145deg, #d0d0d0, #f8f8f8);
+    border: 2px solid #777;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .card-slot:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card {
+    width: 45px;
+    height: 20px;
+    background-color: #b3b3b3;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card.inserted {
+    background-color: #4caf50;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Выбор воды */
+  .water-selection button {
+    position: absolute;
+    right: 7%;
+    top: 35%;
+    background-color: #00aaff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+  }
+  
+  .water-selection button:hover {
+    background-color: #0077b3;
+  }
+  
+  /* Анимация заливки воды */
+  .pouring-animation {
+    color: #00aaff;
+    font-size: 1.4rem;
+    font-weight: bold;
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  /* Кнопка сброса */
+  .reset-btn {
+    background-color: #ff3b3b;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+  }
+  
+  .reset-btn:hover {
+    background-color: #d32f2f;
+  }
+  
